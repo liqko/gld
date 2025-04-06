@@ -1,7 +1,7 @@
 import React, { useEffect } from "react";
 
 const links = [
-  { title: "ACP Contenidos", url: "https://www.guialocaldolores.com.ar/acp", image: "logo.png" },
+  { title: "Programación - Enlaces", url: "https://www.guialocaldolores.com.ar/acp", image: "logo.png" },
   { title: "Radio Online", url: "https://server.radiostreaming.com.ar/8174/stream", image: "radio.png" },
   { title: "Streaming", url: "https://www.youtube.com/@acpcontenidos", image: "streaming.png" },
   { title: "Blog", url: "https://www.guialocaldolores.com.ar/acp-blog/", image: "blog.png" }
