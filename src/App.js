@@ -43,21 +43,47 @@ export default function App() {
         overflowX: "hidden"
       }}
     >
-      {/* Logo - ubicado 40px más a la izquierda */}
-      <div style={{ position: "fixed", top: 16, left: "calc(50% - 360px)", zIndex: 10 }}>
+      {/* Marca de agua centrada */}
+      <div
+        style={{
+          position: "fixed",
+          top: "50%",
+          left: "50%",
+          transform: "translate(-50%, -50%)",
+          opacity: 0.2,
+          zIndex: 0,
+          pointerEvents: "none"
+        }}
+      >
+        <img src="logo.png" alt="Marca de agua" style={{ width: 700 }} />
+      </div>
+
+      {/* Logo arriba con fondo negro traslúcido */}
+      <div
+        style={{
+          margin: "32px auto 0 auto",
+          backgroundColor: "rgba(0, 0, 0, 0.6)",
+          borderRadius: 12,
+          padding: 8,
+          width: "100%",
+          maxWidth: 400,
+          display: "flex",
+          justifyContent: "center",
+          alignItems: "center"
+        }}
+      >
         <img
           src="logo.png"
           alt="Logo"
           style={{
             width: 150,
-            borderRadius: 10,
-            boxShadow: "0 4px 8px rgba(0,0,0,0.3)"
+            borderRadius: 8
           }}
         />
       </div>
 
       {/* Contenido principal */}
-      <div style={{ paddingTop: 130, paddingBottom: 100, display: "flex", flexDirection: "column", alignItems: "center" }}>
+      <div style={{ paddingTop: 40, paddingBottom: 100, display: "flex", flexDirection: "column", alignItems: "center" }}>
         {/* Botón de instalación */}
         <button
           id="installButton"
@@ -112,38 +138,37 @@ export default function App() {
           ))}
         </div>
 
-        {/* Redes sociales separadas del logo de la productora */}
+        {/* Redes sociales */}
         <div
-  style={{
-    marginTop: 48,
-    display: "flex",
-    flexDirection: "column",
-    alignItems: "center",
-    gap: 16,
-    backgroundColor: "rgba(255, 255, 255, 0.85)",
-    borderRadius: 16,
-    padding: 24,
-    boxShadow: "0 4px 8px rgba(0,0,0,0.2)",
-    width: "100%",
-    maxWidth: 400
-  }}
->
-  <h3 style={{ fontSize: 22, fontWeight: "bold", textAlign: "center", marginBottom: 20 }}>
-    ¡Bancanos y sumate a la guía de tu ciudad!
-  </h3>
-  {/* Redes sociales */}
-  <div style={{ display: "flex", gap: 16 }}>
-    <a href="https://wa.me/5492245459957" target="_blank" rel="noopener noreferrer">
-      <img src="whatsapp.png" alt="WhatsApp" style={{ width: 40, height: 40 }} />
-    </a>
-    <a href="https://www.instagram.com/guialocal.dolores" target="_blank" rel="noopener noreferrer">
-      <img src="instagram.png" alt="Instagram" style={{ width: 40, height: 40 }} />
-    </a>
-    <a href="https://www.facebook.com/profile.php?id=61556181291408" target="_blank" rel="noopener noreferrer">
-      <img src="facebook.png" alt="Facebook" style={{ width: 40, height: 40 }} />
-    </a>
-  </div>
-</div>
+          style={{
+            marginTop: 48,
+            display: "flex",
+            flexDirection: "column",
+            alignItems: "center",
+            gap: 16,
+            backgroundColor: "rgba(255, 255, 255, 0.85)",
+            borderRadius: 16,
+            padding: 24,
+            boxShadow: "0 4px 8px rgba(0,0,0,0.2)",
+            width: "100%",
+            maxWidth: 400
+          }}
+        >
+          <h3 style={{ fontSize: 22, fontWeight: "bold", textAlign: "center", marginBottom: 20 }}>
+            ¡Bancanos y sumate a la guía de tu ciudad!
+          </h3>
+          <div style={{ display: "flex", gap: 16 }}>
+            <a href="https://wa.me/5492245459957" target="_blank" rel="noopener noreferrer">
+              <img src="whatsapp.png" alt="WhatsApp" style={{ width: 40, height: 40 }} />
+            </a>
+            <a href="https://www.instagram.com/guialocal.dolores" target="_blank" rel="noopener noreferrer">
+              <img src="instagram.png" alt="Instagram" style={{ width: 40, height: 40 }} />
+            </a>
+            <a href="https://www.facebook.com/profile.php?id=61556181291408" target="_blank" rel="noopener noreferrer">
+              <img src="facebook.png" alt="Facebook" style={{ width: 40, height: 40 }} />
+            </a>
+          </div>
+        </div>
 
         {/* Logo de la productora */}
         <div
