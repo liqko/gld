@@ -1,6 +1,11 @@
 {
+<<<<<<< HEAD
   "name": "ACP Contenidos",
   "short_name": "ACP",
+=======
+  "name": "Guía Local Dolores",
+  "short_name": "Guía Local Dolores",
+>>>>>>> 2ccf82d (Primer push al repo gld)
   "start_url": ".",
   "display": "standalone",
   "background_color": "#000000",
