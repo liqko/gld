@@ -1,15 +1,10 @@
 {
-<<<<<<< HEAD
-  "name": "ACP Contenidos",
-  "short_name": "ACP",
-=======
   "name": "Guía Local Dolores",
-  "short_name": "Guía Local Dolores",
->>>>>>> 2ccf82d (Primer push al repo gld)
-  "start_url": ".",
+  "short_name": "Guía Dolores",
+  "start_url": "/",
   "display": "standalone",
-  "background_color": "#000000",
-  "theme_color": "#0033CC",
+  "background_color": "#ffffff",
+  "theme_color": "#0ca950",
   "icons": [
     {
       "src": "logo-192.png",
@@ -23,4 +18,3 @@
     }
   ]
 }
-
