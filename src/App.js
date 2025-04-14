@@ -18,6 +18,20 @@ export default function App() {
       const btn = document.getElementById("installButton");
       if (btn) btn.style.display = "block";
     });
+
+    const script1 = document.createElement("script");
+    script1.src = "https://www.googletagmanager.com/gtag/js?id=G-N3FS1B5WG7";
+    script1.async = true;
+    document.head.appendChild(script1);
+
+    const script2 = document.createElement("script");
+    script2.innerHTML = `
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+      gtag('config', 'G-N3FS1B5WG7');
+    `;
+    document.head.appendChild(script2);
   }, []);
 
   const handleInstallClick = () => {
@@ -43,7 +57,7 @@ export default function App() {
         overflowX: "hidden"
       }}
     >
-      {/* Marca de agua centrada */}
+      {/* Marca de agua */}
       <div
         style={{
           position: "fixed",
@@ -58,11 +72,11 @@ export default function App() {
         <img src="logo.png" alt="Marca de agua" style={{ width: 700 }} />
       </div>
 
-      {/* Logo arriba con fondo negro traslúcido */}
+      {/* Logo superior */}
       <div
         style={{
           margin: "32px auto 0 auto",
-          backgroundColor: "rgba(0, 0, 0, 0.6)",
+          backgroundColor: "#001f54",
           borderRadius: 12,
           padding: 8,
           width: "100%",
@@ -138,39 +152,31 @@ export default function App() {
           ))}
         </div>
 
-        {/* Redes sociales */}
+        {/* Redes sociales dentro de fondo azul */}
         <div
           style={{
             marginTop: 48,
-            display: "flex",
-            flexDirection: "column",
-            alignItems: "center",
-            gap: 16,
-            backgroundColor: "rgba(255, 255, 255, 0.85)",
+            backgroundColor: "#001f54",
             borderRadius: 16,
-            padding: 24,
-            boxShadow: "0 4px 8px rgba(0,0,0,0.2)",
-            width: "100%",
-            maxWidth: 400
+            padding: 16,
+            display: "flex",
+            justifyContent: "center",
+            gap: 16,
+            boxShadow: "0 4px 8px rgba(0,0,0,0.2)"
           }}
         >
-          <h3 style={{ fontSize: 22, fontWeight: "bold", textAlign: "center", marginBottom: 20 }}>
-            ¡Bancanos y sumate a la guía de tu ciudad!
-          </h3>
-          <div style={{ display: "flex", gap: 16 }}>
-            <a href="https://wa.me/5492245459957" target="_blank" rel="noopener noreferrer">
-              <img src="whatsapp.png" alt="WhatsApp" style={{ width: 40, height: 40 }} />
-            </a>
-            <a href="https://www.instagram.com/guialocal.dolores" target="_blank" rel="noopener noreferrer">
-              <img src="instagram.png" alt="Instagram" style={{ width: 40, height: 40 }} />
-            </a>
-            <a href="https://www.facebook.com/profile.php?id=61556181291408" target="_blank" rel="noopener noreferrer">
-              <img src="facebook.png" alt="Facebook" style={{ width: 40, height: 40 }} />
-            </a>
-          </div>
+          <a href="https://wa.me/5492245459957" target="_blank" rel="noopener noreferrer">
+            <img src="whatsapp.png" alt="WhatsApp" style={{ width: 40, height: 40 }} />
+          </a>
+          <a href="https://www.instagram.com/guialocal.dolores" target="_blank" rel="noopener noreferrer">
+            <img src="instagram.png" alt="Instagram" style={{ width: 40, height: 40 }} />
+          </a>
+          <a href="https://www.facebook.com/profile.php?id=61556181291408" target="_blank" rel="noopener noreferrer">
+            <img src="facebook.png" alt="Facebook" style={{ width: 40, height: 40 }} />
+          </a>
         </div>
 
-        {/* Logo de la productora */}
+        {/* Botón de la productora */}
         <div
           style={{
             marginTop: 16,
@@ -178,7 +184,7 @@ export default function App() {
             flexDirection: "column",
             alignItems: "center",
             gap: 16,
-            backgroundColor: "rgba(255, 255, 255, 0.85)",
+            backgroundColor: "#001f54",
             borderRadius: 16,
             padding: 24,
             boxShadow: "0 4px 8px rgba(0,0,0,0.2)",
@@ -187,8 +193,60 @@ export default function App() {
           }}
         >
           <a href="https://www.liqko.com.ar" target="_blank" rel="noopener noreferrer">
-            <img src="idea.png" alt="Productora" style={{ width: 200 }} />
+            <img src="idea.png" alt="Productora" style={{ width: 450 }} />
           </a>
+        </div>
+
+        {/* Política de privacidad */}
+        <div
+          style={{
+            marginTop: 32,
+            display: "flex",
+            flexDirection: "column",
+            alignItems: "center",
+            gap: 16,
+            backgroundColor: "rgba(244, 11, 11, 0.98)",
+            borderRadius: 16,
+            padding: 24,
+            boxShadow: "0 4px 8px rgba(0,0,0,0.2)",
+            width: "100%",
+            maxWidth: 400
+          }}
+        >
+          <a
+            href="https://www.guialocaldolores.com.ar/descarga-la-app/politicas-de-privacidad/"
+            target="_blank"
+            rel="noopener noreferrer"
+            style={{
+              textDecoration: "none",
+              backgroundColor: "red",
+              color: "white",
+              padding: "6px 12px",
+              borderRadius: 8,
+              fontSize: 12,
+              fontWeight: "bold"
+            }}
+          >
+            Política de Privacidad y Descargo de Responsabilidad
+          </a>
+        </div>
+
+        {/* Derechos reservados */}
+        <div
+          style={{
+            marginTop: 32,
+            backgroundColor: "#001f54",
+            color: "white",
+            fontSize: 12,
+            textAlign: "center",
+            padding: 24,
+            borderRadius: 16,
+            boxShadow: "0 4px 8px rgba(0,0,0,0.2)",
+            width: "100%",
+            maxWidth: 400
+          }}
+        >
+          © Todos los derechos reservados
         </div>
       </div>
     </div>

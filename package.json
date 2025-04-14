@@ -1,5 +1,5 @@
 {
-  "name": "mi-pwa",
+  "name": "gld",
   "version": "0.1.0",
   "private": true,
   "dependencies": {
@@ -8,6 +8,7 @@
     "postcss": "^8.5.2",
     "react": "^19.0.0",
     "react-dom": "^19.0.0",
+    "react-ga4": "^2.1.0",
     "react-scripts": "5.0.1",
     "serialize-javascript": "^6.0.2",
     "web-vitals": "^4.2.4"
