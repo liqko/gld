@@ -246,7 +246,7 @@ export default function App() {
             maxWidth: 400
           }}
         >
-          © Todos los derechos reservados
+          © Todos los derechos reservados - 2025
         </div>
       </div>
     </div>
