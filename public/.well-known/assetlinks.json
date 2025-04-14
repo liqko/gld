@@ -1,0 +1,15 @@
+[
+    {
+      "relation": [
+        "delegate_permission/common.handle_all_urls"
+      ],
+      "target": {
+        "namespace": "android_app",
+        "package_name": "app.vercel.guialocaldolores.twa",
+        "sha256_cert_fingerprints": [
+          "9C:F7:80:2E:77:C2:20:4D:23:08:A1:7B:8E:6F:64:79:CB:E4:F2:D0:8D:01:49:FD:73:40:81:89:54:0D:16:E9"
+        ]
+      }
+    }
+  ]
+  
