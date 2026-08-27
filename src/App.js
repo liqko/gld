@@ -43,12 +43,18 @@ export default function App() {
   ];
 
   return (
-    <main className="app-shell" style={{ backgroundImage: "linear-gradient(rgba(8, 39, 66, 0.22), rgba(8, 39, 66, 0.34)), url('/fondo-app.png')" }}>
+    <main
+      className="app-shell"
+      style={{
+        backgroundImage:
+          "linear-gradient(rgba(8,39,66,.22), rgba(8,39,66,.34)), url('/fondo-app.png')"
+      }}
+    >
       <section className="hero-card">
         <img className="main-logo" src="/logo.png" alt="Guía Local" />
 
         <div className="brand-slogan">
-          Todo lo que ofrece tu ciudad, en un solo lugar
+          Todo lo que ofrece la ciudad, en un solo lugar
         </div>
 
         <div className="bubble-stage" aria-label="Servicios disponibles en Guía Local">
@@ -76,30 +82,25 @@ export default function App() {
           📲 INSTALAR APP
         </button>
 
-        <div className="social-row">
+        <div className="social-box">
           <a href="https://wa.me/5492245459957" target="_blank" rel="noopener noreferrer">
             <img src="/whatsapp.png" alt="WhatsApp" />
           </a>
-
           <a href="https://www.instagram.com/guialocal.dolores" target="_blank" rel="noopener noreferrer">
             <img src="/instagram.png" alt="Instagram" />
           </a>
-
           <a href="https://www.facebook.com/profile.php?id=61556181291408" target="_blank" rel="noopener noreferrer">
             <img src="/facebook.png" alt="Facebook" />
           </a>
         </div>
 
-        <a
-          className="ecosystem-link"
-          href="https://www.liqko.com.ar"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          ACP Media · ACP Contenidos
-        </a>
+        <div className="producer-box">
+          <a href="https://www.liqko.com.ar" target="_blank" rel="noopener noreferrer">
+            <img src="/idea.png" alt="ACP Media · ACP Contenidos" />
+          </a>
+        </div>
 
-        <div className="legal-links">
+        <div className="legal-box">
           <a href="/terminos-y-condiciones/">Términos y condiciones</a>
           <a href="/politica-de-privacidad/">Política de privacidad</a>
           <a className="regret-link" href="/boton-de-arrepentimiento/">
@@ -107,7 +108,9 @@ export default function App() {
           </a>
         </div>
 
-        <div className="copyright">© Guía Local</div>
+        <div className="copyright-box">
+          © Todos los derechos reservados - 2026
+        </div>
       </section>
     </main>
   );
