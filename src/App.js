@@ -101,9 +101,6 @@ export default function App() {
         </div>
 
         <div className="legal-box">
-          <a className="legal-button" href="/terminos-y-condiciones/">
-            Términos y condiciones
-          </a>
           <a
             className="legal-button"
             href="https://www.guialocaldolores.com.ar/descarga-la-app/politicas-de-privacidad/"
@@ -111,9 +108,6 @@ export default function App() {
             rel="noopener noreferrer"
           >
             Política de Privacidad y Descargo de Responsabilidad
-          </a>
-          <a className="legal-button regret-link" href="/boton-de-arrepentimiento/">
-            Botón de arrepentimiento
           </a>
         </div>
 
