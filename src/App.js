@@ -43,7 +43,7 @@ export default function App() {
   ];
 
   return (
-    <main className="app-shell">
+    <main className="app-shell" style={{ backgroundImage: "linear-gradient(rgba(8, 39, 66, 0.22), rgba(8, 39, 66, 0.34)), url(\'/fondo-app.png\')" }}>
       <section className="hero-card">
         <img className="main-logo" src="/logo.png" alt="Guía Local" />
 
