@@ -22,9 +22,11 @@ body {
   display: flex;
   align-items: center;
   justify-content: center;
-  background:
-    linear-gradient(rgba(8, 39, 66, 0.22), rgba(8, 39, 66, 0.34)),
-    url("/fondo-app.png") center / cover no-repeat fixed;
+  background: linear-gradient(rgba(8, 39, 66, 0.22), rgba(8, 39, 66, 0.34));
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-attachment: fixed;
 }
 
 .hero-card {
