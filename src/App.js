@@ -83,7 +83,7 @@ export default function App() {
         </button>
 
         <div className="social-box">
-          <a href="https://wa.me/5492245459957" target="_blank" rel="noopener noreferrer">
+          <a href="https://wa.me/5491150972086" target="_blank" rel="noopener noreferrer">
             <img src="/whatsapp.png" alt="WhatsApp" />
           </a>
           <a href="https://www.instagram.com/guialocal.dolores" target="_blank" rel="noopener noreferrer">
@@ -95,7 +95,7 @@ export default function App() {
         </div>
 
         <div className="producer-box">
-          <a href="https://www.liqko.com.ar" target="_blank" rel="noopener noreferrer">
+          <a href="https://www.guialocal.ar/nosotros" target="_blank" rel="noopener noreferrer">
             <img src="/idea.png" alt="ACP Media · ACP Contenidos" />
           </a>
         </div>
@@ -103,7 +103,7 @@ export default function App() {
         <div className="legal-box">
           <a
             className="legal-button"
-            href="https://www.guialocaldolores.com.ar/descarga-la-app/politicas-de-privacidad/"
+            href="https://www.guialocal.ar/politicas-de-privacidad/"
             target="_blank"
             rel="noopener noreferrer"
           >
