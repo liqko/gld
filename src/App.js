@@ -3,7 +3,7 @@ import "./App.css";
 
 const CITY_KEY = "gld_app_ciudad_v1";
 const ANUNCIANTES_API = "https://script.google.com/macros/s/AKfycbzom6il-vhSMAnsNp0ipfTHqf2ha-nOtwVEv7xR9gcc6u01UiL9AVG9O-dZedCUvaGS/exec";
-const PLATFORM_URL = "https://liqko.github.io/guia-local-dolores/plataforma/carcasa.html";
+const PLATFORM_URL = "https://guialocal.ar/guia/";
 
 function jsonpApi(params = {}, timeoutMs = 15000) {
   return new Promise((resolve, reject) => {
