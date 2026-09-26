@@ -82,6 +82,8 @@ function buildPlatformUrl(city) {
 export default function App() {
   const [cities, setCities] = useState([]);
   const [selectedId, setSelectedId] = useState("");
+  const [cityQuery, setCityQuery] = useState("");
+  const [showMatches, setShowMatches] = useState(false);
   const [loadingCities, setLoadingCities] = useState(true);
   const [cityError, setCityError] = useState("");
 
@@ -103,9 +105,8 @@ export default function App() {
           .filter((city) => city && (city.ciudad_id || city.id) && cityLabel(city))
           .sort((a, b) => cityLabel(a).localeCompare(cityLabel(b), "es"));
         setCities(normalized);
-        if (normalized.length === 1) {
-          setSelectedId(String(normalized[0].ciudad_id || normalized[0].id));
-        }
+        // La ciudad se elige escribiendo. No preseleccionamos ninguna,
+        // aunque por ahora haya una sola disponible.
       })
       .catch(() => {
         if (!active) return;
@@ -136,6 +137,31 @@ export default function App() {
     () => cities.find((city) => String(city.ciudad_id || city.id) === selectedId) || null,
     [cities, selectedId]
   );
+
+  const matchingCities = useMemo(() => {
+    const query = cityQuery.trim().toLocaleLowerCase("es");
+    if (!query) return [];
+    return cities
+      .filter((city) => cityLabel(city).toLocaleLowerCase("es").includes(query))
+      .slice(0, 8);
+  }, [cities, cityQuery]);
+
+  const chooseCity = (city) => {
+    setSelectedId(String(city.ciudad_id || city.id));
+    setCityQuery(cityLabel(city));
+    setShowMatches(false);
+  };
+
+  const handleCityQuery = (event) => {
+    setCityQuery(event.target.value);
+    setSelectedId("");
+    setShowMatches(true);
+  };
+
+  const requestedCity = cityQuery.trim();
+  const requestCityUrl = requestedCity
+    ? `https://www.guialocal.ar/nosotros?ciudad_solicitada=${encodeURIComponent(requestedCity)}`
+    : "https://www.guialocal.ar/nosotros";
 
   const handleEnter = () => {
     if (!selectedCity) return;
@@ -183,25 +209,47 @@ export default function App() {
         </div>
 
         <div className="access-box">
-          <label htmlFor="citySelect">Elegí tu ciudad</label>
-          <select
-            id="citySelect"
-            value={selectedId}
-            onChange={(event) => setSelectedId(event.target.value)}
-            disabled={loadingCities || !cities.length}
-          >
-            <option value="">
-              {loadingCities ? "Cargando ciudades..." : "Seleccioná una ciudad"}
-            </option>
-            {cities.map((city) => {
-              const id = String(city.ciudad_id || city.id);
-              return (
-                <option key={id} value={id}>
-                  {cityLabel(city)}
-                </option>
-              );
-            })}
-          </select>
+          <label htmlFor="citySearch">¿Qué ciudad querés consultar?</label>
+          <div className="city-search-wrap">
+            <input
+              id="citySearch"
+              className="city-search"
+              type="search"
+              value={cityQuery}
+              onChange={handleCityQuery}
+              onFocus={() => setShowMatches(true)}
+              placeholder={loadingCities ? "Cargando ciudades..." : "Escribí el nombre de tu ciudad"}
+              autoComplete="off"
+              disabled={loadingCities || !!cityError}
+            />
+
+            {showMatches && cityQuery.trim() && matchingCities.length > 0 && (
+              <div className="city-matches" role="listbox" aria-label="Ciudades disponibles">
+                {matchingCities.map((city) => {
+                  const id = String(city.ciudad_id || city.id);
+                  return (
+                    <button
+                      key={id}
+                      type="button"
+                      className="city-match"
+                      onClick={() => chooseCity(city)}
+                    >
+                      📍 {cityLabel(city)}
+                    </button>
+                  );
+                })}
+              </div>
+            )}
+          </div>
+
+          {!loadingCities && !cityError && requestedCity && matchingCities.length === 0 && !selectedCity && (
+            <div className="city-not-found">
+              <strong>La ciudad que buscás todavía no está disponible en Guía Local.</strong>
+              <a className="city-request" href={requestCityUrl}>
+                Quiero que Guía Local llegue a mi ciudad
+              </a>
+            </div>
+          )}
 
           <button
             type="button"
