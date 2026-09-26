@@ -59,6 +59,27 @@ function cityLabel(city) {
   ).trim();
 }
 
+function countryFlag(city) {
+  const id = String(city?.pais_id || "").trim().toUpperCase();
+  const flags = { ARG: "🇦🇷", BRA: "🇧🇷" };
+  return flags[id] || "🌎";
+}
+
+function cityDisplayLabel(city) {
+  const provinceId = String(city?.provincia_id || "").trim().toUpperCase();
+  return `${countryFlag(city)} ${cityLabel(city)}${provinceId ? ` (${provinceId})` : ""}`;
+}
+
+function citySearchText(city) {
+  return [
+    cityLabel(city),
+    city?.provincia,
+    city?.provincia_id,
+    city?.pais,
+    city?.pais_id
+  ].filter(Boolean).join(" ").toLocaleLowerCase("es");
+}
+
 function buildPlatformUrl(city) {
   const url = new URL(PLATFORM_URL);
   const fields = {
@@ -142,13 +163,13 @@ export default function App() {
     const query = cityQuery.trim().toLocaleLowerCase("es");
     if (!query) return [];
     return cities
-      .filter((city) => cityLabel(city).toLocaleLowerCase("es").includes(query))
+      .filter((city) => citySearchText(city).includes(query))
       .slice(0, 8);
   }, [cities, cityQuery]);
 
   const chooseCity = (city) => {
     setSelectedId(String(city.ciudad_id || city.id));
-    setCityQuery(cityLabel(city));
+    setCityQuery(cityDisplayLabel(city));
     setShowMatches(false);
   };
 
@@ -234,7 +255,7 @@ export default function App() {
                       className="city-match"
                       onClick={() => chooseCity(city)}
                     >
-                      📍 {cityLabel(city)}
+                      {cityDisplayLabel(city)}
                     </button>
                   );
                 })}
