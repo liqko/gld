@@ -102,13 +102,13 @@ function buildPlatformUrl(city) {
 }
 
 export default function App() {
-  const [cities, setCities] = useState([]);
+  const [cities] = useState([]);
   const [selectedId, setSelectedId] = useState("");
   const [cityQuery, setCityQuery] = useState("");
   const [showMatches, setShowMatches] = useState(false);
-  const [loadingCities, setLoadingCities] = useState(true);
-  const [cityError, setCityError] = useState("");
-  const [resolvingEntry, setResolvingEntry] = useState(true);
+  const [loadingCities] = useState(false);
+  const [cityError] = useState("");
+  const [resolvingEntry] = useState(true);
 
   useEffect(() => {
     try {
