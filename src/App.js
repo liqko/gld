@@ -51,16 +51,9 @@ export default function App() {
   }, []);
 
   return (
-    <main
-      className="app-shell app-entry-loading"
-      style={{
-        backgroundImage:
-          "linear-gradient(rgba(8,39,66,.22), rgba(8,39,66,.34)), url('/fondo-app.png')"
-      }}
-    >
+    <main className="app-shell app-entry-loading app-entry-simple">
       <section className="entry-splash" aria-label="Ingresando a Guía Local">
         <img className="entry-splash-logo" src="/logo.png" alt="Guía Local" />
-        <div className="entry-splash-text">Ingresando a Guía Local…</div>
       </section>
     </main>
   );
