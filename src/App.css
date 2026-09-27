@@ -436,3 +436,16 @@ body {
   color: #fff;
   text-shadow: 0 2px 8px rgba(0,0,0,.45);
 }
+
+
+/* Splash mínimo: sólo marca mientras se resuelve la entrada */
+.app-entry-simple {
+  background-image: none !important;
+  background: #fff;
+}
+.app-entry-simple .entry-splash {
+  padding: 0;
+}
+.app-entry-simple .entry-splash-logo {
+  width: min(240px, 64vw);
+}
