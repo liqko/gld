@@ -4,6 +4,7 @@ import "./App.css";
 const CITY_KEY = "gld_app_ciudad_v1";
 const ANUNCIANTES_API = "https://script.google.com/macros/s/AKfycbzom6il-vhSMAnsNp0ipfTHqf2ha-nOtwVEv7xR9gcc6u01UiL9AVG9O-dZedCUvaGS/exec";
 const PLATFORM_URL = "https://guialocal.ar/guia/";
+const CITY_BRIDGE_KEY = "gld_ciudad_contexto";
 
 function jsonpApi(params = {}, timeoutMs = 15000) {
   return new Promise((resolve, reject) => {
@@ -188,10 +189,26 @@ export default function App() {
 
   const handleEnter = () => {
     if (!selectedCity) return;
+
+    const cityContext = {
+      pais_id: String(selectedCity?.pais_id || "").trim(),
+      provincia_id: String(selectedCity?.provincia_id || "").trim(),
+      ciudad_id: String(selectedCity?.ciudad_id || selectedCity?.id || "").trim(),
+      pais: String(selectedCity?.pais || "").trim(),
+      provincia: String(selectedCity?.provincia || "").trim(),
+      ciudad: cityLabel(selectedCity),
+      ts: Date.now()
+    };
+
     try {
       localStorage.setItem(CITY_KEY, JSON.stringify(selectedCity));
+      // También usamos la misma clave que consume la Guía web.
+      // Si app y web comparten almacenamiento en el navegador, la ciudad queda disponible
+      // aunque la página contenedora no retransmita los parámetros.
+      localStorage.setItem(CITY_BRIDGE_KEY, JSON.stringify(cityContext));
     } catch (e) {}
-    window.location.href = buildPlatformUrl(selectedCity);
+
+    window.location.assign(buildPlatformUrl(selectedCity));
   };
 
   const handleInstallClick = () => {
