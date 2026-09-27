@@ -119,34 +119,7 @@ export default function App() {
       }
     } catch (e) {}
 
-    // Primera entrada: usamos la misma puerta canónica de la web.
-    // Así no mantenemos dos procesos territoriales distintos.
     window.location.replace("https://guialocal.ar/");
-    return;
-
-    let active = true;
-    jsonpApi({ action: "ubicaciones" })
-      .then((data) => {
-        if (!active) return;
-        const list = Array.isArray(data?.ciudades) ? data.ciudades : [];
-        const normalized = list
-          .filter((city) => city && (city.ciudad_id || city.id) && cityLabel(city))
-          .sort((a, b) => cityLabel(a).localeCompare(cityLabel(b), "es"));
-        setCities(normalized);
-        // La ciudad se elige escribiendo. No preseleccionamos ninguna,
-        // aunque por ahora haya una sola disponible.
-      })
-      .catch(() => {
-        if (!active) return;
-        setCityError("No pudimos cargar las ciudades en este momento.");
-      })
-      .finally(() => {
-        if (active) setLoadingCities(false);
-      });
-
-    return () => {
-      active = false;
-    };
   }, []);
 
   useEffect(() => {
