@@ -119,7 +119,11 @@ export default function App() {
       }
     } catch (e) {}
 
-    setResolvingEntry(false);
+    // Primera entrada: usamos la misma puerta canónica de la web.
+    // Así no mantenemos dos procesos territoriales distintos.
+    window.location.replace("https://guialocal.ar/");
+    return;
+
     let active = true;
     jsonpApi({ action: "ubicaciones" })
       .then((data) => {
