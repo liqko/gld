@@ -107,6 +107,7 @@ export default function App() {
   const [showMatches, setShowMatches] = useState(false);
   const [loadingCities, setLoadingCities] = useState(true);
   const [cityError, setCityError] = useState("");
+  const [resolvingEntry, setResolvingEntry] = useState(true);
 
   useEffect(() => {
     try {
@@ -117,6 +118,7 @@ export default function App() {
       }
     } catch (e) {}
 
+    setResolvingEntry(false);
     let active = true;
     jsonpApi({ action: "ubicaciones" })
       .then((data) => {
@@ -202,6 +204,23 @@ export default function App() {
       if (btn) btn.style.display = "none";
     });
   };
+
+  if (resolvingEntry) {
+    return (
+      <main
+        className="app-shell app-entry-loading"
+        style={{
+          backgroundImage:
+            "linear-gradient(rgba(8,39,66,.22), rgba(8,39,66,.34)), url('/fondo-app.png')"
+        }}
+      >
+        <section className="entry-splash" aria-label="Ingresando a Guía Local">
+          <img className="entry-splash-logo" src="/logo.png" alt="Guía Local" />
+          <div className="entry-splash-text">Ingresando a Guía Local…</div>
+        </section>
+      </main>
+    );
+  }
 
   const bubbles = [
     "Comercios",
