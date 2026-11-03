@@ -9,3 +9,8 @@ html,body,#root{margin:0;padding:0;width:100%;height:100%;overflow:hidden}
 .guia-app-mensaje strong{font-size:16px;color:#006699}
 .guia-app-boton{border:0;border-radius:9px;background:#006699;color:#fff;min-height:44px;padding:0 16px;font-weight:800;cursor:pointer}
 .guia-app-cerrar{border:0;background:transparent;color:#4f6170;font-size:24px;cursor:pointer;padding:4px 6px}
+
+.guia-app-overlay{position:absolute;inset:0;background:#0009;z-index:1001;display:flex;justify-content:center;align-items:center;padding:16px}
+.guia-app-dialogo{width:100%;max-width:430px;background:#fff;border-radius:14px;padding:24px;box-shadow:0 8px 40px #0004;color:#263238;font:15px/1.5 Manrope,Arial,sans-serif}
+.guia-app-dialogo h2{margin:0 0 12px;font-size:22px;color:#006699}
+.guia-app-dialogo p{margin:0 0 15px}
