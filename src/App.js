@@ -11,6 +11,14 @@ export default function App() {
     () => window.matchMedia("(display-mode: standalone)").matches || window.navigator.standalone === true
   );
   const [bannerOpen, setBannerOpen] = useState(true);
+  const [showGuide, setShowGuide] = useState(
+    () => new URLSearchParams(window.location.search).get("instalar") !== "1" ||
+      window.matchMedia("(display-mode: standalone)").matches
+  );
+  const enterGuide = () => {
+    setShowGuide(true);
+    window.history.replaceState(null, "", "/");
+  };
   const [showInstructions, setShowInstructions] = useState(false);
 
   useEffect(() => {
@@ -23,6 +31,7 @@ export default function App() {
       installEvent.current = null;
       setCanInstall(false);
       setInstalled(true);
+      setShowGuide(true);
     }
     window.addEventListener("beforeinstallprompt", ready);
     window.addEventListener("appinstalled", installedNow);
@@ -54,14 +63,29 @@ export default function App() {
 
   return (
     <main className="guia-app">
-      <iframe
-        className="guia-app-contenido"
-        title="Guía Local"
-        src={GUIDE_URL}
-        allow="geolocation; autoplay; encrypted-media; picture-in-picture"
-        referrerPolicy="strict-origin-when-cross-origin"
-      />
-      {!installed && bannerOpen && (
+      {showGuide ? (
+        <iframe
+          className="guia-app-contenido"
+          title="Guía Local"
+          src={GUIDE_URL}
+          allow="geolocation; autoplay; encrypted-media; picture-in-picture"
+          referrerPolicy="strict-origin-when-cross-origin"
+        />
+      ) : (
+        <section className="guia-app-descarga">
+          <img src="/logo-192.png" alt="Guía Local" width="92" height="92" />
+          <h1>Guía Local</h1>
+          <p className="guia-app-eslogan">Todo lo que ofrece la ciudad, en un sólo lugar!</p>
+          <p>Instalá Guía Local gratis, sin iniciar sesión antes.</p>
+          <button type="button" className="guia-app-boton guia-app-grande" onClick={install}>
+            Instalar Guía Local
+          </button>
+          <button type="button" className="guia-app-link" onClick={enterGuide}>
+            Continuar sin instalar
+          </button>
+        </section>
+      )}
+      {!installed && bannerOpen && showGuide && (
         <aside className="guia-app-instalar" aria-label="Instalar Guía Local">
           <img src="/logo-192.png" alt="" className="guia-app-logo" />
           <div className="guia-app-mensaje">
