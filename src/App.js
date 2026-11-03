@@ -6,7 +6,7 @@ const GUIDE_URL = "https://anunciantes-guialocal.web.app/plataforma/inicio.html"
 
 export default function App() {
   const installEvent = useRef(null);
-  const [canInstall, setCanInstall] = useState(false);
+  const [, setCanInstall] = useState(false);
   const [installed, setInstalled] = useState(
     () => window.matchMedia("(display-mode: standalone)").matches || window.navigator.standalone === true
   );
