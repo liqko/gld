@@ -95,7 +95,7 @@ export default function App() {
     setInstallPrompt(null);
     try {
       await prompt.prompt();
-      const choice = await prompt.userChoice;
+      await prompt.userChoice;
       // Cuando se cancela, el navegador podrá emitir otro evento de instalación.
     } catch (error) {
       console.warn("La instalación no está disponible:", error);
