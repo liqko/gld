@@ -1,0 +1,45 @@
+name: Compilar APK Guia Local
+on:
+  push:
+    branches: [apk-android-guia-local-20261104]
+  workflow_dispatch:
+jobs:
+  apk:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-java@v4
+        with:
+          distribution: temurin
+          java-version: '17'
+      - uses: gradle/actions/setup-gradle@v4
+        with:
+          gradle-version: '8.10.2'
+      - uses: android-actions/setup-android@v4
+        with:
+          packages: 'platform-tools'
+      - name: Preparar SDK Android
+        run: |
+          yes | sdkmanager --licenses >/dev/null || true
+          sdkmanager "platforms;android-35" "build-tools;35.0.0"
+      - name: Compilar Android
+        run: gradle --no-daemon :app:assembleDebug
+        working-directory: android
+      - uses: actions/upload-artifact@v4
+        with:
+          name: GuiaLocal-Android-APK-PRUEBA
+          path: android/app/build/outputs/apk/debug/app-debug.apk
+          if-no-files-found: error
+      - name: Publicar APK de prueba con enlace directo
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          gh release create android-prueba-20261104 \
+            android/app/build/outputs/apk/debug/app-debug.apk#GuiaLocal-Android-PRUEBA.apk \
+            --repo "${{ github.repository }}" \
+            --target "${{ github.sha }}" \
+            --title "Guía Local Android - prueba 04-11-2026" \
+            --notes "Versión de prueba para evaluar descarga desde la web. No distribuir al público hasta verificar sesión, ciudad y geolocalización." \
+            --prerelease
