@@ -1,52 +1,13 @@
 import React, { useEffect, useState } from "react";
 import "./App.css";
 
-// La app instalada mantiene exactamente la entrada anterior: Vercel -> Jimdo.
-// La visita desde el navegador conserva esta pantalla para poder instalar.
-const CITY_KEY = "gld_app_ciudad_v1";
-const PLATFORM_URL = "https://guialocal.ar/guia/";
-const HOME_URL = "https://guialocal.ar/";
-
-function cityLabel(city) {
-  return String(
-    city?.ciudad_visible ||
-    city?.ciudad ||
-    city?.nombre ||
-    city?.name ||
-    city?.ciudad_id ||
-    ""
-  ).trim();
-}
-
-function buildPlatformUrl(city) {
-  const url = new URL(PLATFORM_URL);
-  const fields = {
-    pais_id: city?.pais_id,
-    provincia_id: city?.provincia_id,
-    ciudad_id: city?.ciudad_id || city?.id,
-    pais: city?.pais,
-    provincia: city?.provincia,
-    ciudad: cityLabel(city)
-  };
-  Object.entries(fields).forEach(([key, value]) => {
-    if (value !== undefined && value !== null && String(value).trim()) {
-      url.searchParams.set(key, String(value).trim());
-    }
-  });
-  return url.toString();
-}
+// La aplicación es una puerta de entrada pública, no un gestor de sesión.
+// La autenticación, las ciudades y las preferencias pertenecen a guialocal.ar.
+// Usamos el dominio canónico para compartir las cookies existentes del sitio.
+const HOME_URL = "https://www.guialocal.ar/";
 
 function enterGuide() {
-  let destination = HOME_URL;
-  try {
-    const saved = JSON.parse(localStorage.getItem(CITY_KEY) || "null");
-    if (saved && (saved.ciudad_id || saved.id)) {
-      destination = buildPlatformUrl(saved);
-    }
-  } catch (e) {
-    // No bloquear la entrada si el almacenamiento no está disponible.
-  }
-  window.location.replace(destination);
+  window.location.replace(HOME_URL);
 }
 
 function isInstalledWindow() {
@@ -60,7 +21,7 @@ export default function App() {
   const [isInstalled, setIsInstalled] = useState(() => isInstalledWindow());
 
   useEffect(() => {
-    // CRÍTICO: en la app YA instalada conservar el redireccionamiento directo.
+    // En la app instalada abrir siempre la web pública, sin exigir login ni ciudad.
     if (isInstalledWindow()) {
       enterGuide();
       return;
