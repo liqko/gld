@@ -7,7 +7,7 @@ const isInstalled = () => window.matchMedia("(display-mode: standalone)").matche
 
 export default function App() {
   const deferred = useRef(null);
-  const [available, setAvailable] = useState(false);
+  const [, setAvailable] = useState(false);
   const [installed, setInstalled] = useState(isInstalled);
   const [help, setHelp] = useState(false);
 
