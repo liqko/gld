@@ -58,7 +58,6 @@ function isInstalledWindow() {
 export default function App() {
   const [installPrompt, setInstallPrompt] = useState(null);
   const [isInstalled, setIsInstalled] = useState(() => isInstalledWindow());
-  const [showHelp, setShowHelp] = useState(false);
 
   useEffect(() => {
     // CRÍTICO: en la app YA instalada conservar el redireccionamiento directo.
@@ -75,7 +74,6 @@ export default function App() {
     const onInstalled = () => {
       setInstallPrompt(null);
       setIsInstalled(true);
-      setShowHelp(false);
     };
     const onDisplayChange = () => {
       if (isInstalledWindow()) enterGuide();
@@ -92,18 +90,15 @@ export default function App() {
   }, []);
 
   async function handleInstall() {
-    if (!installPrompt) {
-      setShowHelp(true);
-      return;
-    }
+    if (!installPrompt) return;
     const prompt = installPrompt;
     setInstallPrompt(null);
     try {
       await prompt.prompt();
-      const choice = await prompt.userChoice;
-      if (choice?.outcome !== "accepted") setShowHelp(true);
+      await prompt.userChoice;
+      // Cuando se cancela, el navegador podrá emitir otro evento de instalación.
     } catch (error) {
-      setShowHelp(true);
+      console.warn("La instalación no está disponible:", error);
     }
   }
 
@@ -121,10 +116,10 @@ export default function App() {
           Guía Local en tu teléfono
         </h1>
         <p style={{color: "#345", lineHeight: 1.5, margin: "0 0 20px"}}>
-          Instalá el acceso directo o ingresá sin instalar. No necesitás registrarte para instalarla.
+          {installPrompt ? "Instalá Guía Local con un toque o ingresá sin instalar." : "Ingresá a Guía Local. La instalación se ofrecerá cuando esté disponible en este dispositivo."}
         </p>
 
-        {!isInstalled && (
+        {!isInstalled && installPrompt && (
           <button
             id="installButton"
             type="button"
@@ -140,17 +135,7 @@ export default function App() {
           📍 ENTRAR A GUÍA LOCAL
         </a>
 
-        {showHelp && !isInstalled && (
-          <div role="status" style={{marginTop: 14, padding: 14, borderRadius: 12, background: "#eff7fa", color: "#123a4b", textAlign: "left", lineHeight: 1.5}}>
-            <strong>Instalación desde el navegador</strong>
-            <p style={{margin: "8px 0 0"}}>
-              Si no apareció la ventana de instalación, abrí el menú del navegador y elegí
-              «Instalar aplicación» o «Agregar a pantalla de inicio».
-              En iPhone: abrí esta página con Safari, tocá Compartir y elegí
-              «Agregar a pantalla de inicio».
-            </p>
-          </div>
-        )}
+
       </section>
     </main>
   );
